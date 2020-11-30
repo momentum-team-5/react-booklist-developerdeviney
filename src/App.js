@@ -1,35 +1,43 @@
 import React from 'react'
 import './App.css'
-import Nav from './components/Nav'
+import Register from './Register'
 import Login from './Login'
 import Books from './Books'
-import MyBooks from './components/MyBooks'
-import MyNotes from './components/MyNotes'
-
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
-
+import { BrowserRouter as Router, Link, Switch, Route } from 'react-router-dom'
+import { useLocalStorage } from './hooks'
 
 function App() {
+  const [auth, setAuth] = useLocalStorage('books_auth', null)
+
   return (
     <Router>
       <div className="App">
-        <Nav />
+        {auth && (
+          <div>
+            <span>Logged in as {auth.username}</span> | <button onClick={() => setAuth(null)}>Log Out</button>
+          </div>
+        )}
+
         <Switch>
-          <Route path='/' exact component={Home} />
-          <Route path='/login' component={Login} />
-          <Route path='/books' component={Books} />
-          <Route path='/mybooks' component={MyBooks} />
-          <Route path='/mynotes' component={MyNotes} />
+          <Route path='/signup'>
+            <Register
+              auth={auth}
+              onRegister={setAuth}
+            />
+          </Route>
+          <Route path='/login'>
+            <Login
+              auth={auth}
+              onLogin={setAuth}
+            />
+          </Route>
+          <Route path='/' >
+            <Books auth={auth} />
+          </Route>
         </Switch>
       </div>
-    </Router>
+    </Router >
   )
 }
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-)
 
 export default App
