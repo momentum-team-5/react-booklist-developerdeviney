@@ -9,6 +9,7 @@ export default function Book({ auth }) {
     const { id } = useParams()
     const [book, setBook] = useState({})
     const [deleted, setDeleted] = useState(false)
+    const [status, setStatus] = useState({})
     const [edit, setEdit] = useState(null)
     const [note, setNote] = useState({})
 
