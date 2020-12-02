@@ -2,7 +2,7 @@ import axios from 'axios'
 import React, { useState } from 'react'
 import clsx from 'clsx'
 import { Link, Redirect } from 'react-router-dom'
-
+import tachyons from 'tachyons'
 
 export default function Register({ auth, onRegister }) {
     const [username, setUsername] = useState('')
@@ -27,6 +27,7 @@ export default function Register({ auth, onRegister }) {
     if (auth) {
         return <Redirect to='/' />
     }
+
 
     return (
         <div classname='Register'>
