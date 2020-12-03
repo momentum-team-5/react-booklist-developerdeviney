@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import './App.css'
 import axios from 'axios'
-import { Redirect, useParams } from "react-router-dom"
-
+import { Redirect, useParams, Link } from "react-router-dom"
 
 
 export default function Book({ auth }) {
     const { id } = useParams()
     const [book, setBook] = useState({})
     const [deleted, setDeleted] = useState(false)
-    const [status, setStatus] = useState({})
     const [edit, setEdit] = useState(null)
     const [note, setNote] = useState({})
 
@@ -34,11 +32,11 @@ export default function Book({ auth }) {
     }
 
     function editBook() {
-        axios.put('https://books-api.glitch.me/api/books/:id', {
+        axios.put('https://books-api.glitch.me/api/books/:id', + id, {
             auth: auth
         })
             .then(response => {
-                setEdit(response.data.book)
+                setEdit(true)
             })
     }
     if (!auth) {
@@ -49,23 +47,22 @@ export default function Book({ auth }) {
         return <Redirect to='/' />
     }
 
-    // if (edit) {
-    //     return <Redirect to='/books._id' />
-    // }
+    if (edit) {
+        return <Redirect to='/book/' />
+    }
 
-    // if (note) {
-    //     return <Redirect to='/books._id' />
-    // }
 
     return (
         <div className='Book'>
+            <h2 className='db b mv2'>Edit Book or <Link to='/book'>Go Back to Book List</Link></h2>
+
             <h2>{book.title || 'No Title'}</h2>
             <p>Written by: {book.authors} on <strong>{book.status}</strong></p>
             <div>
                 <button onClick={note}>Add Note</button>
-                <button onClick={editBook}>Edit Book</button>
+                <button><Link to='/editbook'>Edit Book</Link></button>
                 <button onClick={deleteBook}>Delete Book</button>
             </div>
-        </div>
+        </div >
     )
 }

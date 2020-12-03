@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import './App.css'
 import axios from 'axios'
-import { Link, Redirect } from "react-router-dom"
-import Form from 'react-bootstrap/Form'
-import Button from 'react-bootstrap/Button'
+import { Redirect, Link, useParams } from "react-router-dom"
 
-export default function AddBook({ auth }) {
+export default function EditBook({ auth }) {
+    const { id } = useState('')
     const [title, setTitle] = useState('')
     const [authors, setAuthors] = useState('')
     const [feedbackMsg, setFeedbackMsg] = useState('')
@@ -13,9 +12,9 @@ export default function AddBook({ auth }) {
     function handleSubmit(event) {
         event.preventDefault()
 
-        axios.post('https://books-api.glitch.me/api/books', {
+        axios.put('https://books-api.glitch.me/api/books/:id' + id, {
             title: title,
-            authors: [authors]
+            authors: authors
         }, { auth })
             .then(response => {
                 setFeedbackMsg({ type: 'success', message: 'Book Updated' })
@@ -31,8 +30,8 @@ export default function AddBook({ auth }) {
     }
 
     return (
-        <div className='AddBook'>
-            <h2 className='db b mv2'>Add A Book or <Link to='/books'>Go Back to Book List</Link></h2>
+        <div className='EditBook'>
+            <h2 className='db b mv2'>Edit Book or <Link to='/book'>Go Back to Book List</Link></h2>
 
             <form onSubmit={handleSubmit}>
                 <div className='mv2'>
@@ -56,7 +55,7 @@ export default function AddBook({ auth }) {
                     />
                 </div>
                 <div className='mv2'>
-                    <button type='submit'>Add Book</button>
+                    <button onClick={EditBook}>Edit</button>
                 </div>
             </form>
         </div >

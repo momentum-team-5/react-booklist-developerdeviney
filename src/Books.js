@@ -46,6 +46,7 @@ export default function Books({ auth }) {
                 <div key={books._id} className='Book'>
                     <Link to={'/books/' + book._id}>{book.title || 'No Title'}</Link>
                     <p>Written by: {book.authors} on <strong>{book.status}</strong></p>
+
                     {statuses.filter(s => s !== book.status).map(status => (
                         <button key={status} onClick={() => markBookAsStatus(book, status)}>
                             Mark as {status}

@@ -7,8 +7,9 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { useLocalStorage } from './hooks'
 import Book from './Book'
 import AddBook from './AddBook'
-import AddNote from './AddNote'
-import Status from './Status'
+import EditBook from './EditBook'
+//import AddNote from './Addnote'
+
 
 function App() {
   const [auth, setAuth] = useLocalStorage('books_auth', null)
@@ -23,17 +24,17 @@ function App() {
         )}
 
         <Switch>
+          {/* <Route path='/addnote'>
+            <AddNote auth={auth} />
+          </Route> */}
+
           <Route path='/addbook'>
             <AddBook auth={auth} />
           </Route>
 
-          <Route path='/status'>
-            <Status auth={auth} />
+          <Route path='/editbook'>
+            <EditBook auth={auth} />
           </Route>
-
-          {/* <Route path='/addnote'>
-            <AddNote auth={auth} />
-          </Route> */}
 
           <Route path='/books/:id'>
             <Book auth={auth} />
