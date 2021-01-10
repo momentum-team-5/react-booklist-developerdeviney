@@ -2,16 +2,10 @@ import React, { useState, useEffect } from 'react'
 import './App.css'
 import axios from 'axios'
 import { Link, Redirect } from "react-router-dom"
-import AddBook from './AddBook'
-
-
-
 
 export default function Books({ auth }) {
     const [books, setBooks] = useState([])
-
     const statuses = ['toread', 'reading', 'read']
-
     const getBooks = () => {
         axios.get('https://books-api.glitch.me/api/books', {
             auth: auth

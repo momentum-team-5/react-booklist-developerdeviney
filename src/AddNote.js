@@ -37,7 +37,7 @@ export default function AddNote({ auth }) {
             auth: auth
         })
             .then(response => {
-                setDelete(response.data.books)
+                setDelete(true)
             })
     }
 

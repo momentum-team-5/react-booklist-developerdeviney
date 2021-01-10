@@ -59,8 +59,7 @@ export default function Book({ auth }) {
             <h2>{book.title || 'No Title'}</h2>
             <p>Written by: {book.authors} on <strong>{book.status}</strong></p>
             <div>
-                <button onClick={note}>Add Note</button>
-                <button><Link to='/editbook'>Edit Book</Link></button>
+                <button><Link to={'/editbook/' + book._id}>Edit Book</Link></button>
                 <button onClick={deleteBook}>Delete Book</button>
             </div>
         </div >

@@ -8,7 +8,7 @@ import { useLocalStorage } from './hooks'
 import Book from './Book'
 import AddBook from './AddBook'
 import EditBook from './EditBook'
-//import AddNote from './Addnote'
+import AddNote from './AddNote'
 
 
 function App() {
@@ -24,24 +24,20 @@ function App() {
         )}
 
         <Switch>
-          {/* <Route path='/addnote'>
+          <Route path='/addnote'>
             <AddNote auth={auth} />
-          </Route> */}
+          </Route>
 
           <Route path='/addbook'>
             <AddBook auth={auth} />
           </Route>
 
-          <Route path='/editbook'>
+          <Route path='/editbook/:id'>
             <EditBook auth={auth} />
           </Route>
 
           <Route path='/books/:id'>
             <Book auth={auth} />
-          </Route>
-
-          <Route path='/books/:id'>
-            <Books auth={auth} />
           </Route>
 
           <Route path='/signup'>
